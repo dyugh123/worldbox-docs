@@ -9,28 +9,29 @@
             --bg-color: #ffffff; --sidebar-bg: #ffffff; --border-color: #f0f0f0;
             --text-main: #333333; --text-secondary: #888888; --primary-color: #2563eb;
             --code-bg: #1e1e1e; --code-text: #d4d4d4;
-            --badge-green-bg: #e6f4ea; --badge-green-text: #1e8e3e;
-            --badge-yellow-bg: #fef7e0; --badge-yellow-text: #f29900;
+            --badge-green-bg: #e6f4ea; --badge-green-text: #1e8e3e; 
+            --badge-yellow-bg: #fef7e0; --badge-yellow-text: #f29900; 
             --badge-blue-bg: #e8f0fe; --badge-blue-text: #1967d2;
-            --badge-red-bg: #fee2e2; --badge-red-text: #991b1b;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: var(--text-main); background-color: var(--bg-color); display: flex; height: 100vh; overflow: hidden; user-select: none; }
-
+        
+        /* 各种遮罩层 */
         .overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 9999; display: none; justify-content: center; align-items: center; }
         .overlay.active { display: flex; }
+        
         .auth-card { background: #fff; padding: 40px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); text-align: center; width: 90%; max-width: 440px; position: relative; overflow: hidden; }
         .auth-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, #2563eb, #7c3aed, #ec4899); }
         .auth-icon { width: 56px; height: 56px; margin: 0 auto 16px; background: #eef2ff; border-radius: 12px; display: flex; justify-content: center; align-items: center; }
         .auth-card h2 { font-size: 22px; margin-bottom: 6px; color: #1e293b; font-weight: 700; }
         .auth-card .project-name { font-size: 13px; color: var(--primary-color); font-weight: 600; margin-bottom: 24px; letter-spacing: 1px; }
-
+        
         .input-group { text-align: left; margin-bottom: 16px; }
         .input-group label { display: block; font-size: 13px; color: #475569; margin-bottom: 6px; font-weight: 500; }
         .auth-input { width: 100%; padding: 12px 16px; font-size: 14px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; transition: all 0.2s; background: #f8fafc; }
         .auth-input:focus { border-color: var(--primary-color); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); background: #fff; }
         .auth-input[readonly] { background: #e2e8f0; color: #64748b; cursor: not-allowed; }
-
+        
         .phone-group { display: flex; gap: 10px; }
         .phone-group .auth-input { flex: 1; }
         .send-code-btn { padding: 0 16px; background: #e2e8f0; color: #334155; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
@@ -42,6 +43,7 @@
         .error-msg { color: #ef4444; font-size: 13px; margin-top: 16px; display: none; font-weight: 500; }
         .success-msg { color: #10b981; font-size: 13px; margin-top: 16px; display: none; font-weight: 500; }
 
+        /* 设置开关 */
         .switch-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid #f1f5f9; }
         .switch-row span { font-size: 14px; color: #334155; font-weight: 500; }
         .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
@@ -51,8 +53,9 @@
         input:checked + .slider { background-color: #2563eb; }
         input:checked + .slider:before { transform: translateX(20px); }
 
+        /* 主界面 */
         .app-container { display: none; width: 100%; height: 100%; }
-        .sidebar { width: 280px; background-color: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; overflow-y: auto; flex-shrink: 0; padding-bottom: 50px; }
+        .sidebar { width: 280px; background-color: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; overflow-y: auto; flex-shrink: 0; padding-bottom: 50px;}
         .logo-area { padding: 16px 20px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 12px; position: sticky; top: 0; background: #fff; z-index: 10; }
         .logo-icon { width: 24px; height: 24px; }
         .logo-text h1 { font-size: 16px; font-weight: 600; color: #222; }
@@ -63,16 +66,13 @@
         .nav-item:hover { background-color: #f5f5f5; }
         .nav-item.active { background-color: #f0f4ff; color: var(--primary-color); font-weight: 500; border-left: 3px solid var(--primary-color); padding-left: 17px; }
         .nav-item.sub { padding-left: 36px; font-size: 13.5px; color: #555; }
-        .nav-item.sub.active { padding-left: 33px; background-color: transparent; color: var(--primary-color); border-left: none; }
-        .nav-item.hidden { display: none; }
-        .badge { font-size: 11px; padding: 2px 8px; border-radius: 12px; font-weight: 500; transform: scale(0.9); transform-origin: right center; }
+        .badge { font-size: 11px; padding: 2px 8px; border-radius: 12px; font-weight: 500; transform: scale(0.9); }
         .badge.green { background: var(--badge-green-bg); color: var(--badge-green-text); }
         .badge.yellow { background: var(--badge-yellow-bg); color: var(--badge-yellow-text); }
-        .badge.blue { background: var(--badge-blue-bg); color: var(--badge-blue-text); }
-        .badge.red { background: var(--badge-red-bg); color: var(--badge-red-text); }
 
         .main-wrapper { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #fafafa; }
         .topbar { height: 60px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; padding: 0 32px; background: #fff; z-index: 10; }
+        
         .topbar-right { display: flex; gap: 16px; align-items: center; }
         .icon-btn { display: flex; align-items: center; gap: 6px; background: #f1f5f9; color: #334155; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; outline: none; }
         .icon-btn:hover { background: #e2e8f0; color: #0f172a; }
@@ -81,25 +81,23 @@
 
         .search-box { display: flex; align-items: center; background: #f0f0f0; padding: 8px 12px; border-radius: 6px; font-size: 13px; color: var(--text-secondary); width: 300px; }
         .search-box input { border: none; background: transparent; outline: none; margin-left: 8px; width: 100%; color: var(--text-main); font-size: 13px; }
-
+        
         .content-area { flex: 1; overflow-y: auto; padding: 40px 60px; }
         .doc-container { max-width: 900px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
-
+        
         .breadcrumb { font-size: 13px; color: #999; margin-bottom: 16px; }
         h1 { font-size: 28px; margin-bottom: 16px; font-weight: 600; color: #1a1a1a; }
         .tags-row { display: flex; gap: 10px; margin-bottom: 24px; align-items: center; }
-        .tags-row .badge { transform: none; padding: 4px 10px; }
-        .warning-box { background-color: #fffbeb; border: 1px solid #fde68a; color: #92400e; padding: 12px 16px; border-radius: 6px; font-size: 14px; margin-bottom: 24px; line-height: 1.5; display: flex; gap: 8px; }
-        .page-desc { font-size: 15px; line-height: 1.6; margin-bottom: 32px; color: #444; border-left: 4px solid var(--primary-color); background: #f8fafc; padding: 12px; border-radius: 0 6px 6px 0; }
-
+        .page-desc { font-size: 15px; line-height: 1.6; margin-bottom: 32px; color: #444; padding-left: 12px; border-left: 4px solid var(--primary-color); background: #f8fafc; padding: 12px; border-radius: 0 6px 6px 0; }
+        
         .method-block { border-top: 1px solid #eee; padding: 24px 0 32px 0; }
         .method-title { font-size: 18px; font-weight: 600; display: flex; align-items: center; color: #2563eb; font-family: monospace; margin-bottom: 12px; }
         .method-desc { font-size: 14px; line-height: 1.6; color: #555; margin-bottom: 20px; }
         h3 { font-size: 13px; color: #888; margin: 20px 0 8px 0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-
+        
         pre { background-color: var(--code-bg); color: var(--code-text); padding: 16px 20px; border-radius: 8px; overflow-x: auto; font-family: Consolas, monospace; font-size: 13.5px; line-height: 1.6; margin-bottom: 24px; }
-        .code-keyword { color: #569cd6; font-weight: bold;} .code-func { color: #dcdcaa; } .code-string { color: #ce9178; } .code-num { color: #b5cea8; }
-
+        .code-keyword { color: #569cd6; font-weight: bold;} .code-func { color: #dcdcaa; } .code-string { color: #ce9178; }
+        
         table { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 14px; border: 1px solid #eee; }
         th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid #eee; }
         th { background-color: #fafafa; color: #555; font-weight: 600; font-size: 13px; }
@@ -107,21 +105,11 @@
         .support-box { text-align: center; }
         .support-qq { font-size: 24px; font-weight: 700; color: #2563eb; font-family: monospace; margin-bottom: 8px; }
         .support-desc { font-size: 13px; color: #64748b; margin-bottom: 24px; }
-
-        @media (max-width: 768px) {
-            body { flex-direction: column; height: auto; overflow: auto; }
-            .app-container { flex-direction: column; }
-            .sidebar { width: 100%; max-height: 240px; border-right: none; border-bottom: 1px solid var(--border-color); }
-            .content-area { padding: 20px 16px; }
-            .doc-container { padding: 20px; }
-            .search-box { width: 100%; }
-            .topbar { padding: 12px 16px; gap: 10px; }
-        }
     </style>
 </head>
 <body>
 
-    <!-- 一级安全验证 -->
+    <!-- 1. 一级验证 -->
     <div class="overlay active" id="auth-overlay">
         <div class="auth-card">
             <div class="auth-icon">
@@ -129,10 +117,10 @@
             </div>
             <h2>一级安全验证</h2>
             <div class="project-name">WorldBox Core API</div>
-
+            
             <div class="input-group" id="group-pwd">
                 <label>管理员密钥</label>
-                <input type="password" id="password-input" class="auth-input" placeholder="请输入主密码..." autocomplete="off">
+                <input type="password" id="password-input" class="auth-input" placeholder="请输入主密码 TR123..." autocomplete="off">
             </div>
             <div class="input-group" id="group-phone">
                 <label>绑定手机号</label>
@@ -149,12 +137,12 @@
                 <label>短信验证码</label>
                 <input type="text" id="code-input" class="auth-input" placeholder="请输入6位验证码" maxlength="6">
             </div>
-            <button class="auth-btn" onclick="handleLevel1()">验证并继续</button>
+            <button class="auth-btn" onclick="verifyLevel1()">验证并继续</button>
             <div id="auth-error" class="error-msg"></div>
         </div>
     </div>
 
-    <!-- 二级安全验证 -->
+    <!-- 2. 二级验证 -->
     <div class="overlay" id="level2-overlay">
         <div class="auth-card">
             <div class="auth-icon" style="background: #fee2e2;">
@@ -166,14 +154,14 @@
                 <input type="password" id="level2-input" class="auth-input" placeholder="请输入二级密码" autocomplete="off">
             </div>
             <button class="auth-btn" onclick="verifyLevel2()">解密并进入</button>
-            <div id="level2-error" class="error-msg">二级密码错误！</div>
+            <div id="level2-error" class="error-msg">❌ 二级密码错误！</div>
         </div>
     </div>
 
-    <!-- 高级安全设置 -->
+    <!-- 3. 设置面板 -->
     <div class="overlay" id="settings-overlay">
         <div class="auth-card" style="max-width: 480px; text-align: left;">
-            <h2 style="text-align: center; margin-bottom: 24px;">高级安全设置</h2>
+            <h2 style="text-align: center; margin-bottom: 24px;">⚙️ 高级安全设置</h2>
             <div class="switch-row"><span>启用一级多因素验证</span><label class="switch"><input type="checkbox" id="toggle-level1" onchange="updateConfig('level1', this.checked)"><span class="slider"></span></label></div>
             <div class="switch-row"><span>启用 QQ 号识别绑定</span><label class="switch"><input type="checkbox" id="toggle-qq" onchange="updateConfig('qq', this.checked)"><span class="slider"></span></label></div>
             <div class="switch-row"><span>启用网络环境安全验证</span><label class="switch"><input type="checkbox" id="toggle-network" onchange="updateConfig('network', this.checked)"><span class="slider"></span></label></div>
@@ -185,13 +173,13 @@
                     <input type="password" id="new-level2-input" class="auth-input" placeholder="输入新密码，留空则取消">
                 </div>
                 <button class="auth-btn" style="background: #2563eb;" onclick="saveLevel2Pwd()">保存二级密码</button>
-                <div id="settings-msg" class="success-msg">操作成功！</div>
+                <div id="settings-msg" class="success-msg">✅ 操作成功！</div>
             </div>
             <button class="auth-btn" style="background: #f1f5f9; color: #64748b; margin-top: 16px;" onclick="document.getElementById('settings-overlay').classList.remove('active')">关闭面板</button>
         </div>
     </div>
 
-    <!-- 客服中心 -->
+    <!-- 4. 客服中心 -->
     <div class="overlay" id="support-overlay">
         <div class="auth-card support-box">
             <div class="auth-icon" style="background: #ecfdf5;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
@@ -205,12 +193,12 @@
         </div>
     </div>
 
-    <!-- 主应用层 -->
+    <!-- 5. 主应用层 -->
     <div class="app-container" id="app-container">
         <aside class="sidebar">
             <div class="logo-area">
                 <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-                <div class="logo-text"><h1>WorldBox 脚本 API</h1><p>开发者控制台 (v3.0 安全版)</p></div>
+                <div class="logo-text"><h1>WorldBox 脚本 API</h1><p>开发者控制台 (极速版)</p></div>
             </div>
             <div id="sidebar-menu"></div>
         </aside>
@@ -219,7 +207,7 @@
             <header class="topbar">
                 <div class="search-box">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    <input type="text" id="searchInput" placeholder="搜索模块...">
+                    <input type="text" id="searchInput" placeholder="搜索模块或方法...">
                 </div>
                 <div class="topbar-right">
                     <button class="icon-btn support" onclick="document.getElementById('support-overlay').classList.add('active')">客服中心</button>
@@ -233,270 +221,296 @@
     </div>
 
     <script>
-        // 内嵌 Base64 数据（菜单 + 文档）
-        const _0x9a2f = "eyJtZW51IjpbeyJnIjoi5paw54mIIMK3IOaMh+WNlyIsImkiOlt7ImlkIjoiZ3VpZGUtb3ZlcnZpZXciLCJuIjoi5qaC6KeIIn0seyJpZCI6Imd1aWRlLXF1aWNrc3RhcnQiLCJuIjoi5b+r6YCf5byA5aeLIn0seyJpZCI6Imd1aWRlLXBhZ2VzdGF0ZSIsIm4iOiLpobXpnaLnirbmgIEifV19LHsiZyI6IuaWsOeJiCDCtyDmoLjlv4Pov5DooYznjq/looMiLCJpIjpbeyJpZCI6ImNvcmUtZXZlbnRzIiwibiI6IuS6i+S7tiIsInQiOnsieCI6IumDqOWIhiIsImMiOiJ5ZWxsb3cifSwiY2giOlt7ImlkIjoiZXZlbnQtb25idWlsZCIsIm4iOiJvblBsYXllckJ1aWxkQmxvY2tFdmVudCJ9LHsiaWQiOiJldmVudC1vbmNoYXQiLCJuIjoib25TZW5kQ2hhdE1lc3NhZ2VFdmVudCJ9LHsiaWQiOiJldmVudC1vbnRpY2siLCJuIjoib25UaWNrRXZlbnQifSx7ImlkIjoiZXZlbnQtb25sZWF2ZSIsIm4iOiJvbkxlYXZlR2FtZUV2ZW50In1dfSx7ImlkIjoiY29yZS1zY3JpcHRiYXNlIiwibiI6IlNjcmlwdEJhc2UiLCJ0Ijp7IngiOiLlt7LmjqXnur8iLCJjIjoiZ3JlZW4ifX0seyJpZCI6ImNvcmUtbWluZWNyYWZ0IiwibiI6Ik1pbmVjcmFmdCIsInQiOnsieCI6IuW3suaOpee6vyIsImMiOiJncmVlbiJ9fSx7ImlkIjoiY29yZS13b3JsZCIsIm4iOiJXb3JsZCIsInQiOnsieCI6IuW3suaOpee6vyIsImMiOiJncmVlbiJ9fSx7ImlkIjoiY29yZS1hY3RvciIsIm4iOiJBY3RvciIsInQiOnsieCI6IuW3suaOpee6vyIsImMiOiJncmVlbiJ9fSx7ImlkIjoiY29yZS1wbGF5ZXIiLCJuIjoiUGxheWVyIiwidCI6eyJ4Ijoi5bey5o6l57q/IiwiYyI6ImdyZWVuIn19LHsiaWQiOiJjb3JlLWxvY2FscGxheWVyIiwibiI6IkxvY2FsUGxheWVyIiwidCI6eyJ4Ijoi5bey5o6l57q/IiwiYyI6ImdyZWVuIn19LHsiaWQiOiJjb3JlLWl0ZW0iLCJuIjoiSXRlbSIsInQiOnsieCI6IuW3suaOpee6vyIsImMiOiJncmVlbiJ9fSx7ImlkIjoiY29yZS1ibG9jayIsIm4iOiJCbG9jayIsInQiOnsieCI6IuW3suaOpee6vyIsImMiOiJncmVlbiJ9fSx7ImlkIjoiY29yZS1uYnQiLCJuIjoiTkJUIiwidCI6eyJ4Ijoi5bey5o6l57q/IiwiYyI6ImdyZWVuIn19LHsiaWQiOiJjb3JlLXBhY2tldCIsIm4iOiJQYWNrZXQiLCJ0Ijp7IngiOiLlt7LmjqXnur8iLCJjIjoiZ3JlZW4ifX0seyJpZCI6ImNvcmUtd2lyaW5nIiwibiI6IuaOpee6v+eKtuaAgSIsInQiOnsieCI6IumDqOWIhiIsImMiOiJ5ZWxsb3cifX1dfSx7ImciOiLmlrDniYggwrcg55WM6Z2i5LiO6L6T5YWlIiwiaSI6W3siaWQiOiJ1aS1jYW1lcmEiLCJuIjoiQ2FtZXJhIiwidCI6eyJ4Ijoi5bey5o6l57q/IiwiYyI6ImdyZWVuIn19LHsiaWQiOiJ1aS1pbnB1dCIsIm4iOiJJbnB1dCIsInQiOnsieCI6IuW3suaOpee6vyIsImMiOiJncmVlbiJ9fSx7ImlkIjoidWktb3B0aW9ucyIsIm4iOiJPcHRpb25zIiwidCI6eyJ4Ijoi5bey5o6l57q/IiwiYyI6ImdyZWVuIn19LHsiaWQiOiJ1aS1tZWRpYSIsIm4iOiJNZWRpYSIsInQiOnsieCI6IuW3suaOpee6vyIsImMiOiJncmVlbiJ9fSx7ImlkIjoidWktbWVudSIsIm4iOiJNZW51IiwidCI6eyJ4Ijoi5bey5o6l57q/IiwiYyI6ImdyZWVuIn19LHsiaWQiOiJ1aS1ndWkiLCJuIjoiR3VpIiwidCI6eyJ4Ijoi5bey5o6l57q/IiwiYyI6ImdyZWVuIn19LHsiaWQiOiJ1aS1pMThuIiwibiI6IkkxOG4iLCJ0Ijp7IngiOiLlt7LmjqXnur8iLCJjIjoiZ3JlZW4ifX1dfSx7ImciOiLmlrDniYggwrcg5bel5YW35LiO57O757ufIiwiaSI6W3siaWQiOiJzeXMtc3AiLCJuIjoiU3AiLCJ0Ijp7IngiOiLlt7LmjqXnur8iLCJjIjoiZ3JlZW4ifX0seyJpZCI6InN5cy1uZXR3b3JrIiwibiI6Ik5ldHdvcmsiLCJ0Ijp7IngiOiLlt7LmjqXnur8iLCJjIjoiZ3JlZW4ifX0seyJpZCI6InN5cy1zb2NrZXQiLCJuIjoiU29ja2V0IiwidCI6eyJ4Ijoi5bey5o6l57q/IiwiYyI6ImdyZWVuIn19LHsiaWQiOiJzeXMtbmV0ZWFzZSIsIm4iOiJOZXRFYXNlIiwidCI6eyJ4Ijoi6YOo5YiGIiwiYyI6InllbGxvdyJ9fSx7ImlkIjoic3lzLW9zIiwibiI6Ik9zIiwidCI6eyJ4Ijoi5bey5o6l57q/IiwiYyI6ImdyZWVuIn19XX1dLCJkb2NzIjp7Imd1aWRlLW92ZXJ2aWV3Ijp7ImIiOiLmlrDniYggwrcg5oyH5Y2XIC8g5qaC6KeIIiwidCI6IuamguiniCIsImQiOiLmnKzpobXpnaLku4vnu43kuoYgV29ya0JveCDohJrmnKzns7vnu5/nmoTln7rmnKznu4TmiJDjgIHov5DooYzmnLrliLblkozmlbTkvZPmnrbmnoTjgIIiLCJ0YWdzIjpbeyJ0ZXh0Ijoi56iz5a6aIiwidHlwZSI6ImdyZWVuIn1dLCJNIjpbeyJuIjoid29ya2JveC52ZXJzaW9uIiwiZCI6IuiOt+WPluW9k+WJjSBXb3JrQm94IOi/kOihjOeOr+Wig+eJiOacrOWPt+OAgiIsInMiOiJjb25zdCB2ZXJzaW9uID0gd29ya2JveC52ZXJzaW9uOyIsImMiOiJjb25zb2xlLmxvZyhcIuW9k+WJjeeJiOacrDogXCIgKyB3b3JrYm94LnZlcnNpb24pOyJ9XX0sImd1aWRlLXF1aWNrc3RhcnQiOnsiYiI6IuaWsOeJiCDCtyDmjIfljZcgLyDlv6vpgJ/lvIDlp4siLCJ0Ijoi5b+r6YCf5byA5aeLIiwiZCI6IuaWsOaJi+W8leWvvO+8jOaVmeS9oOWmguS9lee8luWGmeW5tui/kOihjOS9oOeahOesrOS4gOihjOS7o+eggeOAgiIsInRhZ3MiOlt7InRleHQiOiLmjIfljZciLCJ0eXBlIjoiYmx1ZSJ9XSwiTSI6W3sibiI6Im1pbmVjcmFmdC5icm9hZGNhc3QiLCJkIjoi5Y+R6YCB5YWo5pyN5bm/5pKt5raI5oGv44CCIiwicyI6Im1pbmVjcmFmdC5icm9hZGNhc3QobWVzc2FnZSkiLCJjIjoibWluZWNyYWZ0LmJyb2FkY2FzdChcIsKnYeasoui/juaWsOeOqeWutuWKoOWFpeacjeWKoeWZqO+8gVwiKTsifV19LCJndWlkZS1wYWdlc3RhdGUiOnsiYiI6IuaWsOeJiCDCtyDmjIfljZcgLyDpobXpnaLnirbmgIEiLCJ0Ijoi6aG16Z2i54q25oCBIiwiZCI6IueUqOS6juiOt+WPluWSjOeuoeeQhuW9k+WJjSBVSSDpobXpnaLnmoTnirbmgIHkv6Hmga/jgIIiLCJ0YWdzIjpbeyJ0ZXh0Ijoi5bey5o6l57q/IiwidHlwZSI6ImdyZWVuIn1dLCJNIjpbeyJuIjoicGFnZS5nZXRDdXJyZW50U3RhdGUiLCJkIjoi6I635Y+W5b2T5YmN5q2j5Zyo5pi+56S655qEIFVJIOmhtemdoueKtuaAgeOAgiIsInMiOiJjb25zdCBzdGF0ZSA9IHBhZ2UuZ2V0Q3VycmVudFN0YXRlKCk7IiwiYyI6ImNvbnN0IHN0YXRlID0gcGFnZS5nZXRDdXJyZW50U3RhdGUoKTtcbmlmKHN0YXRlID09PSAnbWVudScpIHtcbiAgICBjb25zb2xlLmxvZyhcIuWcqOiPnOWNlemhtVwiKTtcbn0ifV19LCJjb3JlLWV2ZW50cyI6eyJiIjoi5paw54mIIMK3IOaguOW/g+i/kOihjOeOr+WigyAvIOS6i+S7tiIsInQiOiLkuovku7YiLCJkIjoi6ISa5pys5YWo5bGA5LqL5Lu25Zue6LCD77yM6ISa5pys5Zyo6ISa5pysIHdvcmtlciDkuIrlvILmraXmiafooYzjgIIiLCJ0YWdzIjpbeyJ0ZXh0Ijoi6YOo5YiGIiwidHlwZSI6InllbGxvdyJ9LHsidGV4dCI6IuaOpeWPo+Wlkee6piIsInR5cGUiOiJibHVlIn1dLCJNIjpbeyJuIjoib25QbGF5ZXJCdWlsZEJsb2NrRXZlbnQiLCJkIjoi546p5a625oiQ5Yqf5pS+572u5pa55Z2X5ZCO6Kem5Y+R44CCIiwicyI6ImZ1bmN0aW9uIG9uUGxheWVyQnVpbGRCbG9ja0V2ZW50KGlkLCB4LCB5LCB6LCBzaWRlKSB7fSIsImMiOiJmdW5jdGlvbiBvblBsYXllckJ1aWxkQmxvY2tFdmVudChpZCwgeCwgeSwgeiwgc2lkZSkge1xuICAgIGNvbnN0IGJUeXBlID0gYmxvY2suZ2V0VHlwZSh4LCB5LCB6KTtcbiAgICBpZiAoYlR5cGUgPT09ICdtaW5lY3JhZnQ6dG50Jykge1xuICAgICAgICBtaW5lY3JhZnQuY2xpZW50TWVzc2FnZShcIsKnY+emgeatouaUvue9rlROVO+8gVwiKTtcbiAgICAgICAgYmxvY2suc2V0VHlwZSh4LCB5LCB6LCAnbWluZWNyYWZ0OmFpcicpO1xuICAgIH1cbn0iLCJwYXJhbXMiOlt7Im5hbWUiOiJpZCIsInR5cGUiOiJzdHJpbmciLCJkZXNjIjoi546p5a625ZSv5LiAIElEIn0seyJuYW1lIjoieCwgeSwgeiIsInR5cGUiOiJudW1iZXIiLCJkZXNjIjoi5pa55Z2X5Z2Q5qCHIn0seyJuYW1lIjoic2lkZSIsInR5cGUiOiJudW1iZXIiLCJkZXNjIjoi5pa55Z2X6Z2iIn1dfSx7Im4iOiJvblNlbmRDaGF0TWVzc2FnZUV2ZW50IiwiZCI6IueOqeWutuWPkemAgeiBiuWkqea2iOaBr+aXtuinpuWPke+8iOWPr+i/lOWbniB0cnVlIOWPlua2iO+8ieOAgiIsInMiOiJmdW5jdGlvbiBvblNlbmRDaGF0TWVzc2FnZUV2ZW50KG1lc3NhZ2UpIHt9IiwiYyI6ImZ1bmN0aW9uIG9uU2VuZENoYXRNZXNzYWdlRXZlbnQobWVzc2FnZSkge1xuICAgIGlmKG1lc3NhZ2UuaW5jbHVkZXMoXCLlub/lkYpcIikpIHtcbiAgICAgICAgcmV0dXJuIHRydWU7IC8vIOaLpuaIquWPlua2iFxuICAgIH1cbn0ifSx7Im4iOiJvblRpY2tFdmVudCIsImQiOiLmr48gdGlja++8iOe6piAxLzIwIOenku+8ieinpuWPkeS4gOasoeOAgiIsInMiOiJmdW5jdGlvbiBvblRpY2tFdmVudCgpIHt9IiwiYyI6ImxldCB0aWNrQ291bnQgPSAwO1xuZnVuY3Rpb24gb25UaWNrRXZlbnQoKSB7XG4gICAgdGlja0NvdW50Kys7XG4gICAgaWYodGlja0NvdW50ID49IDEwMCkgeyAvLyDmr48156eSXG4gICAgICAgIGxvY2FscGxheWVyLmdldEVudGl0eSgpLnNldEhlYWx0aCgyMCk7XG4gICAgICAgIHRpY2tDb3VudCA9IDA7XG4gICAgfVxufSJ9LHsibiI6Im9uTGVhdmVHYW1lRXZlbnQiLCJkIjoi546p5a6256a75byA5ri45oiP5pe26Kem5Y+R44CCIiwicyI6ImZ1bmN0aW9uIG9uTGVhdmVHYW1lRXZlbnQocGxheWVySWQpIHt9IiwiYyI6ImZ1bmN0aW9uIG9uTGVhdmVHYW1lRXZlbnQocGxheWVySWQpIHtcbiAgICBtaW5lY3JhZnQuYnJvYWRjYXN0KHBsYXllcklkICsgXCIg5bey5LiL57q/XCIpO1xufSJ9XSwid2FybmluZyI6IuacrOmhteS7hemDqOWIhuaIkOWRmOW3suaOpee6v++8muW4puOAjOacquaOpee6v+OAjeagh+iusOeahOaOpeWPo+S4jeS8muWcqOiEmuacrOS4reWvvOWHuu+8jOiwg+eUqOWJjeivt+aguOWvueagh+iusOOAgiJ9LCJldmVudC1vbmJ1aWxkIjp7ImIiOiLmoLjlv4MgLyDkuovku7YgLyDmlL7nva4iLCJ0Ijoib25QbGF5ZXJCdWlsZEJsb2NrRXZlbnQiLCJkIjoi546p5a625oiQ5Yqf5pS+572u5pa55Z2X5ZCO6Kem5Y+R44CCIiwidGFncyI6W3sidGV4dCI6IuW3suaOpee6vyIsInR5cGUiOiJncmVlbiJ9XSwiTSI6W3sibiI6Im9uUGxheWVyQnVpbGRCbG9ja0V2ZW50IiwiZCI6IuinpuWPkeS6i+S7tiIsInMiOiJmdW5jdGlvbiBvblBsYXllckJ1aWxkQmxvY2tFdmVudChpZCwgeCwgeSwgeiwgc2lkZSkge30iLCJjIjoiZnVuY3Rpb24gb25QbGF5ZXJCdWlsZEJsb2NrRXZlbnQoaWQsIHgsIHksIHopIHtcbiAgICBjb25zb2xlLmxvZyhcIlBsYXllclwiLCBpZCwgXCJidWlsdCBhdFwiLCB4LCB5LCB6KTtcbn0ifV19LCJldmVudC1vbmNoYXQiOnsiYiI6IuaguOW/gyAvIOS6i+S7tiAvIOiBiuWkqSIsInQiOiJvblNlbmRDaGF0TWVzc2FnZUV2ZW50IiwiZCI6IueOqeWutuWPkemAgeiBiuWkqeinpuWPkeOAgiIsInRhZ3MiOlt7InRleHQiOiLlt7LmjqXnur8iLCJ0eXBlIjoiZ3JlZW4ifV0sIk0iOlt7Im4iOiJvblNlbmRDaGF0TWVzc2FnZUV2ZW50IiwiZCI6Iui/lOWbniB0cnVlIOWPlua2iOWPkemAgSIsInMiOiJmdW5jdGlvbiBvblNlbmRDaGF0TWVzc2FnZUV2ZW50KG1lc3NhZ2UpIHt9IiwiYyI6ImZ1bmN0aW9uIG9uU2VuZENoYXRNZXNzYWdlRXZlbnQobXNnKSB7XG4gICAgaWYobXNnLmluY2x1ZGVzKFwiYmFkXCIpKSByZXR1cm4gdHJ1ZTtcbn0ifV19LCJldmVudC1vbnRpY2siOnsiYiI6IuaguOW/gyAvIOS6i+S7tiAvIFRpY2siLCJ0Ijoib25UaWNrRXZlbnQiLCJkIjoi6auY6aKR6Kem5Y+R44CCIiwidGFncyI6W3sidGV4dCI6IuW3suaOpee6vyIsInR5cGUiOiJncmVlbiJ9XSwiTSI6W3sibiI6Im9uVGlja0V2ZW50IiwiZCI6Iuavj+enkuaJp+ihjCAyMCDmrKEiLCJzIjoiZnVuY3Rpb24gb25UaWNrRXZlbnQoKSB7fSIsImMiOiJmdW5jdGlvbiBvblRpY2tFdmVudCgpIHtcbiAgICAvLyDpq5jpopHpgLvovpHvvIzpgb/lhY3pmLvloZ5cbn0ifV19LCJldmVudC1vbmxlYXZlIjp7ImIiOiLmoLjlv4MgLyDkuovku7YgLyDnprvlvIAiLCJ0Ijoib25MZWF2ZUdhbWVFdmVudCIsImQiOiLnprvlvIDmuLjmiI/op6blj5HjgIIiLCJ0YWdzIjpbeyJ0ZXh0Ijoi5bey5o6l57q/IiwidHlwZSI6ImdyZWVuIn1dLCJNIjpbeyJuIjoib25MZWF2ZUdhbWVFdmVudCIsImQiOiLlpITnkIbnjqnlrrbpgIDlh7rpgLvovpEiLCJzIjoiZnVuY3Rpb24gb25MZWF2ZUdhbWVFdmVudChwbGF5ZXJJZCkge30iLCJjIjoiZnVuY3Rpb24gb25MZWF2ZUdhbWVFdmVudChpZCkge1xuICAgIGNvbnNvbGUubG9nKFwiQnllXCIsIGlkKTtcbn0ifV19LCJjb3JlLXNjcmlwdGJhc2UiOnsiYiI6IuaguOW/gyAvIFNjcmlwdEJhc2UiLCJ0IjoiU2NyaXB0QmFzZSIsImQiOiLln7rnoYDohJrmnKzmqKHlnZfjgILnlKjkuo7nrqHnkIbohJrmnKznlJ/lkb3lkajmnJ/jgIHkuIrkuIvmloflkozov5DooYzphY3nva7jgIIiLCJ0YWdzIjpbeyJ0ZXh0Ijoi5bey5o6l57q/IiwidHlwZSI6ImdyZWVuIn1dLCJNIjpbeyJuIjoiU2NyaXB0QmFzZS5tb3VudCIsImQiOiLmjILovb3kuIDkuKrohJrmnKzliLDkuLvov5vnqIvjgIIiLCJzIjoiU2NyaXB0QmFzZS5tb3VudChuYW1lLCBjYWxsYmFjaykiLCJjIjoiU2NyaXB0QmFzZS5tb3VudCgnbXlfc2NyaXB0JywgKCkgPT4ge1xuICAgIGNvbnNvbGUubG9nKFwi6ISa5pys5bey5Yqg6L29XCIpO1xufSk7In0seyJuIjoic2NyaXB0LnNldEludGVydmFsIiwiZCI6Iuiuvue9ruWumuaXtuWZqOS7u+WKoeOAgiIsInMiOiJzY3JpcHQuc2V0SW50ZXJ2YWwoZm4sIGRlbGF5KSIsImMiOiJjb25zdCBteVNjcmlwdCA9IG5ldyBTY3JpcHRCYXNlKCd0aW1lcicpO1xubXlTY3JpcHQuc2V0SW50ZXJ2YWwoKCkgPT4ge1xuICAgIHdvcmxkLnNldFRpbWUoNjAwMCk7XG59LCAxMDAwMCk7In1dfSwiY29yZS1taW5lY3JhZnQiOnsiYiI6IuaguOW/gyAvIE1pbmVjcmFmdCIsInQiOiJNaW5lY3JhZnQiLCJkIjoi5o+Q5L6b5LiOIE1pbmVjcmFmdCDmuLjmiI/lhoXmoLjkuqTkupLnmoTlupXlsYLlh73mlbDjgIIiLCJ0YWdzIjpbeyJ0ZXh0Ijoi5bey5o6l57q/IiwidHlwZSI6ImdyZWVuIn1dLCJNIjpbeyJuIjoibWluZWNyYWZ0LmNsaWVudE1lc3NhZ2UiLCJkIjoi5ZCR5pys5Zyw5a6i5oi356uv5Y+R6YCB5LiA5p2h5raI5oGv44CCIiwicyI6Im1pbmVjcmFmdC5jbGllbnRNZXNzYWdlKHRleHQpIiwiYyI6Im1pbmVjcmFmdC5jbGllbnRNZXNzYWdlKFwiwqdh5qyi6L+O5p2l5Yiw5pyN5Yqh5Zmo77yBXCIpOyJ9LHsibiI6Im1pbmVjcmFmdC5icm9hZGNhc3QiLCJkIjoi5ZCR5YWo5pyN5omA5pyJ546p5a625bm/5pKt5raI5oGv44CCIiwicyI6Im1pbmVjcmFmdC5icm9hZGNhc3QodGV4dCkiLCJjIjoibWluZWNyYWZ0LmJyb2FkY2FzdChcIlvns7vnu59dIOacjeWKoeWZqOWwhuWcqCA1IOWIhumSn+WQjumHjeWQr1wiKTsifSx7Im4iOiJtaW5lY3JhZnQuZ2V0UGxheWVyTGlzdCIsImQiOiLojrflj5blvZPliY3lnKjnur/njqnlrrbliJfooajjgIIiLCJzIjoiY29uc3QgbGlzdCA9IG1pbmVjcmFmdC5nZXRQbGF5ZXJMaXN0KCkiLCJjIjoiY29uc3QgcGxheWVycyA9IG1pbmVjcmFmdC5nZXRQbGF5ZXJMaXN0KCk7XG5jb25zb2xlLmxvZyhcIuW9k+WJjeWcqOe6v+S6uuaVsDogXCIgKyBwbGF5ZXJzLmxlbmd0aCk7In1dfSwiY29yZS13b3JsZCI6eyJiIjoi5qC45b+DIC8gV29ybGQiLCJ0IjoiV29ybGQiLCJkIjoi5LiW55WM546v5aKD5o6n5Yi244CCIiwidGFncyI6W3sidGV4dCI6IuW3suaOpee6vyIsInR5cGUiOiJncmVlbiJ9XSwiTSI6W3sibiI6IndvcmxkLnNldFRpbWUiLCJkIjoi6K6+572u5LiW55WM5pe26Ze044CCIiwicyI6IndvcmxkLnNldFRpbWUodGltZSkiLCJjIjoid29ybGQuc2V0VGltZSg2MDAwKTsgLy8g6K6+5Li65q2j5Y2IXG53b3JsZC5zZXRUaW1lKDE4MDAwKTsgLy8g6K6+5Li65Y2I5aScIn0seyJuIjoid29ybGQuc2V0V2VhdGhlciIsImQiOiLorr7nva7lpKnmsJTnirbmgIHjgIIiLCJzIjoid29ybGQuc2V0V2VhdGhlcih0eXBlKSIsImMiOiJ3b3JsZC5zZXRXZWF0aGVyKCdyYWluJyk7IC8vIOS4i+mbqFxud29ybGQuc2V0V2VhdGhlcignY2xlYXInKTsgLy8g5pm05aSpIn1dfSwiY29yZS1hY3RvciI6eyJiIjoi5qC45b+DIC8gQWN0b3IiLCJ0IjoiQWN0b3IiLCJkIjoi5a6e5L2T566h55CG5LiO55Sf5oiQ44CCIiwidGFncyI6W3sidGV4dCI6IuW3suaOpee6vyIsInR5cGUiOiJncmVlbiJ9XSwiTSI6W3sibiI6ImFjdG9yLnNwYXduIiwiZCI6IuWcqOaMh+WumuWdkOagh+eUn+aIkOWunuS9k+OAgiIsInMiOiJhY3Rvci5zcGF3bih0eXBlLCB4LCB5LCB6KSIsImMiOiJhY3Rvci5zcGF3bignbWluZWNyYWZ0OnpvbWJpZScsIDEwMCwgNjQsIDEwMCk7In0seyJuIjoiYWN0b3Iua2lsbCIsImQiOiLmnYDmrbvmjIflrprlrp7kvZPjgIIiLCJzIjoiYWN0b3Iua2lsbChlbnRpdHlJZCkiLCJjIjoiYWN0b3Iua2lsbCh0YXJnZXRFbnRpdHlJZCk7In1dfSwiY29yZS1wbGF5ZXIiOnsiYiI6IuaguOW/gyAvIFBsYXllciIsInQiOiJQbGF5ZXIiLCJkIjoi546p5a6254q25oCB5o6n5Yi244CCIiwidGFncyI6W3sidGV4dCI6IuW3suaOpee6vyIsInR5cGUiOiJncmVlbiJ9XSwiTSI6W3sibiI6InBsYXllci50ZWxlcG9ydCIsImQiOiLlsIbnjqnlrrbkvKDpgIHoh7PmjIflrprlnZDmoIfjgIIiLCJzIjoicGxheWVyLnRlbGVwb3J0KHgsIHksIHopIiwiYyI6InBsYXllci50ZWxlcG9ydCgwLCAxMDAsIDApOyJ9LHsibiI6InBsYXllci5zZW5kTWVzc2FnZSIsImQiOiLlkJHnibnlrprnjqnlrrblj5HpgIHnp4HogYrmtojmga/jgIIiLCJzIjoicGxheWVyLnNlbmRNZXNzYWdlKHRleHQpIiwiYyI6InBsYXllci5zZW5kTWVzc2FnZShcIsKnZeS9oOW3suiiq+S8oOmAgeiHs+WHuueUn+eCuVwiKTsifV19LCJjb3JlLWxvY2FscGxheWVyIjp7ImIiOiLmoLjlv4MgLyBMb2NhbFBsYXllciIsInQiOiJMb2NhbFBsYXllciIsImQiOiLlrqLmiLfnq6/mnKzlnLDnjqnlrrbmjqfliLbjgIIiLCJ0YWdzIjpbeyJ0ZXh0Ijoi5bey5o6l57q/IiwidHlwZSI6ImdyZWVuIn1dLCJNIjpbeyJuIjoibG9jYWxwbGF5ZXIuZ2V0RW50aXR5IiwiZCI6IuiOt+WPluacrOWcsOeOqeWutuWunuS9k+WvueixoeOAgiIsInMiOiJjb25zdCBwbGF5ZXIgPSBsb2NhbHBsYXllci5nZXRFbnRpdHkoKSIsImMiOiJjb25zdCBtZSA9IGxvY2FscGxheWVyLmdldEVudGl0eSgpO1xuaWYobWUpIHtcbiAgICBjb25zb2xlLmxvZyhcIuaIkeeahOWdkOaghzogXCIgKyBtZS5nZXRQb3MoKSk7XG59In1dfSwiY29yZS1pdGVtIjp7ImIiOiLmoLjlv4MgLyBJdGVtIiwidCI6Ikl0ZW0iLCJkIjoi54mp5ZOB5aCG5qCI5pON5L2c44CCIiwidGFncyI6W3sidGV4dCI6IuW3suaOpee6vyIsInR5cGUiOiJncmVlbiJ9XSwiTSI6W3sibiI6Iml0ZW0uY3JlYXRlIiwiZCI6IuWIm+W7uuS4gOS4quaWsOeahOeJqeWTgeWunuS+i+OAgiIsInMiOiJjb25zdCBpdGVtU3RhY2sgPSBpdGVtLmNyZWF0ZShpZCwgY291bnQpIiwiYyI6ImNvbnN0IGRpYW1vbmQgPSBpdGVtLmNyZWF0ZSgnbWluZWNyYWZ0OmRpYW1vbmQnLCA2NCk7In0seyJuIjoiaXRlbS5zZXREaXNwbGF5TmFtZSIsImQiOiLph43lkb3lkI3nianlk4HjgIIiLCJzIjoiaXRlbS5zZXREaXNwbGF5TmFtZShpdGVtU3RhY2ssIG5hbWUpIiwiYyI6Iml0ZW0uc2V0RGlzcGxheU5hbWUoZGlhbW9uZCwgXCLCp2LotoXnuqfpkrvnn7NcIik7In1dfSwiY29yZS1ibG9jayI6eyJiIjoi5qC45b+DIC8gQmxvY2siLCJ0IjoiQmxvY2siLCJkIjoi5pa55Z2X5pWw5o2u6K+75Y+W5LiO5L+u5pS544CCIiwidGFncyI6W3sidGV4dCI6IuW3suaOpee6vyIsInR5cGUiOiJncmVlbiJ9XSwiTSI6W3sibiI6ImJsb2NrLnNldFR5cGUiLCJkIjoi6K6+572u5oyH5a6a5Z2Q5qCH55qE5pa55Z2X57G75Z6L44CCIiwicyI6ImJsb2NrLnNldFR5cGUoeCwgeSwgeiwgdHlwZSkiLCJjIjoiYmxvY2suc2V0VHlwZSgxMCwgNjQsIDEwLCAnbWluZWNyYWZ0OnN0b25lJyk7In0seyJuIjoiYmxvY2suZ2V0VHlwZSIsImQiOiLojrflj5bmlrnlnZfnsbvlnovjgIIiLCJzIjoiY29uc3QgdHlwZSA9IGJsb2NrLmdldFR5cGUoeCwgeSwgeikiLCJjIjoiY29uc3QgYlR5cGUgPSBibG9jay5nZXRUeXBlKDEwLCA2NCwgMTApOyJ9XX0sImNvcmUtbmJ0Ijp7ImIiOiLmoLjlv4MgLyBOQlQiLCJ0IjoiTkJUIiwiZCI6IuW6leWxguaVsOaNruagh+etvuOAgiIsInRhZ3MiOlt7InRleHQiOiLlt7LmjqXnur8iLCJ0eXBlIjoiZ3JlZW4ifV0sIk0iOlt7Im4iOiJuYnQuZ2V0RW50aXR5VGFnIiwiZCI6Iuivu+WPluWunuS9k+eahCBOQlQg5pWw5o2u44CCIiwicyI6ImNvbnN0IGRhdGEgPSBuYnQuZ2V0RW50aXR5VGFnKGVudGl0eSkiLCJjIjoiY29uc3QgbmJ0RGF0YSA9IG5idC5nZXRFbnRpdHlUYWcobXlFbnRpdHkpO1xuY29uc29sZS5sb2cobmJ0RGF0YS5IZWFsdGgpOyJ9XX0sImNvcmUtcGFja2V0Ijp7ImIiOiLmoLjlv4MgLyBQYWNrZXQiLCJ0IjoiUGFja2V0IiwiZCI6Iue9kee7nOWMheaLpuaIquS4juWPkemAgeOAgiIsInRhZ3MiOlt7InRleHQiOiLlt7LmjqXnur8iLCJ0eXBlIjoiZ3JlZW4ifV0sIk0iOlt7Im4iOiJwYWNrZXQuaW50ZXJjZXB0IiwiZCI6IuaLpuaIqueJueWumuexu+Wei+eahOe9kee7nOWMheOAgiIsInMiOiJwYWNrZXQuaW50ZXJjZXB0KHBhY2tldE5hbWUsIGNhbGxiYWNrKSIsImMiOiJwYWNrZXQuaW50ZXJjZXB0KCdzZW5kX2NoYXQnLCAoZGF0YSkgPT4ge1xuICAgIGNvbnNvbGUubG9nKFwi5oum5oiq6IGK5aSpOiBcIiArIGRhdGEudGV4dCk7XG4gICAgcmV0dXJuIGZhbHNlOyAvLyDov5Tlm54gZmFsc2Ug5YWB6K645Y+R6YCBXG59KTsifV19LCJjb3JlLXdpcmluZyI6eyJiIjoi5qC45b+DIC8g5o6l57q/54q25oCBIiwidCI6IuaOpee6v+eKtuaAgSIsImQiOiLmn6Xor6LlupXlsYLnirbmgIHjgIIiLCJ0YWdzIjpbeyJ0ZXh0Ijoi6YOo5YiGIiwidHlwZSI6InllbGxvdyJ9XSwiTSI6W3sibiI6IndpcmluZy5nZXRTdGF0dXMiLCJkIjoi5p+l6K+i5qih5Z2X5o6l57q/54q25oCB44CCIiwicyI6IndpcmluZy5nZXRTdGF0dXMobW9kdWxlKSIsImMiOiJjb25zdCBpc0Nvbm5lY3RlZCA9IHdpcmluZy5nZXRTdGF0dXMoJ29uVGlja0V2ZW50Jyk7XG5pZighaXNDb25uZWN0ZWQpIGNvbnNvbGUud2FybihcIlRpY2sg5pyq5o6l57q/XCIpOyJ9XX0sInVpLWNhbWVyYSI6eyJiIjoi55WM6Z2iIC8gQ2FtZXJhIiwidCI6IkNhbWVyYSIsImQiOiLnm7jmnLrmjqfliLbjgIIiLCJ0YWdzIjpbeyJ0ZXh0Ijoi5bey5o6l57q/IiwidHlwZSI6ImdyZWVuIn1dLCJNIjpbeyJuIjoiY2FtZXJhLnNldEZvdiIsImQiOiLorr7nva7nm7jmnLrop4bph47vvIhGT1bvvInjgIIiLCJzIjoiY2FtZXJhLnNldEZvdih2YWx1ZSkiLCJjIjoiY2FtZXJhLnNldEZvdig5MCk7IC8vIOaJqeWkp+inhumHjlxuY2FtZXJhLnNldEZvdigzMCk7IC8vIOe8qeaUvuinhumHjiJ9XX0sInVpLWlucHV0Ijp7ImIiOiLnlYzpnaIgLyBJbnB1dCIsInQiOiJJbnB1dCIsImQiOiLplK7nm5jpvKDmoIfovpPlhaXnm5HlkKzjgIIiLCJ0YWdzIjpbeyJ0ZXh0Ijoi5bey5o6l57q/IiwidHlwZSI6ImdyZWVuIn1dLCJNIjpbeyJuIjoiaW5wdXQub25LZXlEb3duIiwiZCI6IuebkeWQrOaMiemUruaMieS4i+OAgiIsInMiOiJpbnB1dC5vbktleURvd24oa2V5LCBjYWxsYmFjaykiLCJjIjoiaW5wdXQub25LZXlEb3duKCdrZXkuanVtcCcsICgpID0+IHtcbiAgICBjb25zb2xlLmxvZyhcIueOqeWutuaMieS4i+S6huepuuagvOi3s+i3g1wiKTtcbn0pOyJ9XX0sInVpLW9wdGlvbnMiOnsiYiI6IueVjOmdoiAvIE9wdGlvbnMiLCJ0IjoiT3B0aW9ucyIsImQiOiLmuLjmiI/phY3nva7kv67mlLnjgIIiLCJ0YWdzIjpbeyJ0ZXh0Ijoi5bey5o6l57q/IiwidHlwZSI6ImdyZWVuIn1dLCJNIjpbeyJuIjoib3B0aW9ucy5zZXRWb2x1bWUiLCJkIjoi6K6+572u5ri45oiP6Z+z6YeP44CCIiwicyI6Im9wdGlvbnMuc2V0Vm9sdW1lKGNoYW5uZWwsIHZvbCkiLCJjIjoib3B0aW9ucy5zZXRWb2x1bWUoJ21hc3RlcicsIDAuNSk7XG5vcHRpb25zLnNldFZvbHVtZSgnbXVzaWMnLCAwLjApOyJ9XX0sInVpLW1lZGlhIjp7ImIiOiLnlYzpnaIgLyBNZWRpYSIsInQiOiJNZWRpYSIsImQiOiLpn7PmlYjkuI7lqpLkvZPmkq3mlL7jgIIiLCJ0YWdzIjpbeyJ0ZXh0Ijoi5bey5o6l57q/IiwidHlwZSI6ImdyZWVuIn1dLCJNIjpbeyJuIjoibWVkaWEucGxheVNvdW5kIiwiZCI6IuaSreaUvuaMh+Wumumfs+aViOOAgiIsInMiOiJtZWRpYS5wbGF5U291bmQoaWQsIHZvbCwgcGl0Y2gpIiwiYyI6Im1lZGlhLnBsYXlTb3VuZCgncmFuZG9tLmNsaWNrJywgMS4wLCAxLjApOyJ9XX0sInVpLW1lbnUiOnsiYiI6IueVjOmdoiAvIE1lbnUiLCJ0IjoiTWVudSIsImQiOiLoh6rlrprkuYkgVUkg6I+c5Y2V44CCIiwidGFncyI6W3sidGV4dCI6IuW3suaOpee6vyIsInR5cGUiOiJncmVlbiJ9XSwiTSI6W3sibiI6Im1lbnUuYWRkQ3VzdG9tQnV0dG9uIiwiZCI6IuWcqOiPnOWNleS4rea3u+WKoOiHquWumuS5ieaMiemSruOAgiIsInMiOiJtZW51LmFkZEN1c3RvbUJ1dHRvbihtZW51LCBsYWJlbCwgY2FsbGJhY2spIiwiYyI6Im1lbnUuYWRkQ3VzdG9tQnV0dG9uKCdtYWluJywgJ+S8oOmAgeWbnuWfjicsICgpID0+IHtcbiAgICBwbGF5ZXIudGVsZXBvcnQoMCwgNjQsIDApO1xufSk7In1dfSwidWktZ3VpIjp7ImIiOiLnlYzpnaIgLyBHdWkiLCJ0IjoiR3VpIiwiZCI6IkhVRCDnu5jliLbjgIIiLCJ0YWdzIjpbeyJ0ZXh0Ijoi5bey5o6l57q/IiwidHlwZSI6ImdyZWVuIn1dLCJNIjpbeyJuIjoiZ3VpLmRyYXdUZXh0IiwiZCI6IuWcqOWxj+W5leS4iue7mOWItuaWh+Wtl+OAgiIsInMiOiJndWkuZHJhd1RleHQodGV4dCwgeCwgeSkiLCJjIjoiZnVuY3Rpb24gb25UaWNrRXZlbnQoKSB7XG4gICAgZ3VpLmRyYXdUZXh0KFwiwqdl5Z2Q5qCHOiBcIiArIHBsYXllci5nZXRQb3MoKSwgMTAsIDEwKTtcbn0ifV19LCJ1aS1pMThuIjp7ImIiOiLnlYzpnaIgLyBJMThuIiwidCI6IkkxOG4iLCJkIjoi5aSa6K+t6KiA57+76K+R5pSv5oyB44CCIiwidGFncyI6W3sidGV4dCI6IuW3suaOpee6vyIsInR5cGUiOiJncmVlbiJ9XSwiTSI6W3sibiI6ImkxOG4udHJhbnNsYXRlIiwiZCI6IuiOt+WPlumUruWAvOWvueW6lOeahOe/u+ivkeaWh+acrOOAgiIsInMiOiJjb25zdCB0ZXh0ID0gaTE4bi50cmFuc2xhdGUoa2V5KSIsImMiOiJjb25zdCBuYW1lID0gaTE4bi50cmFuc2xhdGUoJ2l0ZW0uZGlhbW9uZC5uYW1lJyk7XG5jb25zb2xlLmxvZyhcIuacrOWcsOWMluWQjeensDogXCIgKyBuYW1lKTsifV19LCJzeXMtc3AiOnsiYiI6Iuezu+e7nyAvIFNwIiwidCI6IlNwIiwiZCI6IuacrOWcsOmUruWAvOWvueaMgeS5heWMluWtmOWCqOOAgiIsInRhZ3MiOlt7InRleHQiOiLlt7LmjqXnur8iLCJ0eXBlIjoiZ3JlZW4ifV0sIk0iOlt7Im4iOiJzcC5wdXRTdHJpbmciLCJkIjoi5L+d5a2Y5a2X56ym5Liy5pWw5o2u44CCIiwicyI6InNwLnB1dFN0cmluZyhrZXksIHZhbHVlKSIsImMiOiJzcC5wdXRTdHJpbmcoJ25pY2tuYW1lJywgJ1N0ZXZlJyk7In0seyJuIjoic3AuZ2V0U3RyaW5nIiwiZCI6Iuivu+WPluWtl+espuS4suaVsOaNruOAgiIsInMiOiJjb25zdCB2YWwgPSBzcC5nZXRTdHJpbmcoa2V5LCBkZWYpIiwiYyI6ImNvbnN0IG5pY2sgPSBzcC5nZXRTdHJpbmcoJ25pY2tuYW1lJywgJ1Vua25vd24nKTtcbm1pbmVjcmFmdC5jbGllbnRNZXNzYWdlKFwi5qyi6L+OLCBcIiArIG5pY2spOyJ9XX0sInN5cy1uZXR3b3JrIjp7ImIiOiLns7vnu58gLyBOZXR3b3JrIiwidCI6Ik5ldHdvcmsiLCJkIjoiSFRUUCDnvZHnu5zor7fmsYLjgIIiLCJ0YWdzIjpbeyJ0ZXh0Ijoi5bey5o6l57q/IiwidHlwZSI6ImdyZWVuIn1dLCJNIjpbeyJuIjoibmV0d29yay5nZXQiLCJkIjoi5Y+R6LW3IEdFVCDor7fmsYLjgIIiLCJzIjoibmV0d29yay5nZXQodXJsLCBjYWxsYmFjaykiLCJjIjoibmV0d29yay5nZXQoJ2h0dHBzOi8vYXBpLm1jLmNvbS9zdGF0dXMnLCAoZXJyLCByZXMpID0+IHtcbiAgICBpZighZXJyKSBjb25zb2xlLmxvZyhyZXMuYm9keSk7XG59KTsifV19LCJzeXMtc29ja2V0Ijp7ImIiOiLns7vnu58gLyBTb2NrZXQiLCJ0IjoiU29ja2V0IiwiZCI6IldlYlNvY2tldCDplb/ov57mjqXjgIIiLCJ0YWdzIjpbeyJ0ZXh0Ijoi5bey5o6l57q/IiwidHlwZSI6ImdyZWVuIn1dLCJNIjpbeyJuIjoic29ja2V0LmNvbm5lY3QiLCJkIjoi5bu656uLIFdlYlNvY2tldCDov57mjqXjgIIiLCJzIjoic29ja2V0LmNvbm5lY3QodXJsKSIsImMiOiJjb25zdCB3cyA9IHNvY2tldC5jb25uZWN0KCd3c3M6Ly9lY2hvLndlYnNvY2tldC5vcmcnKTtcbndzLm9uTWVzc2FnZSgobXNnKSA9PiBjb25zb2xlLmxvZyhtc2cpKTsifV19LCJzeXMtbmV0ZWFzZSI6eyJiIjoi57O757ufIC8gTmV0RWFzZSIsInQiOiJOZXRFYXNlIiwiZCI6Iue9keaYk+eJiOS4k+WxnuaOpeWPo++8jOW9k+WJjeS7heaOpeWFpemDqOWIhuiDveWKm+OAgiIsInRhZ3MiOlt7InRleHQiOiLpg6jliIYiLCJ0eXBlIjoieWVsbG93In1dLCJNIjpbeyJuIjoibmV0ZWFzZS5nZXRNb2RWZXJzaW9uIiwiZCI6IuiOt+WPlue9keaYkyBNb2Qg54mI5pys44CCIiwicyI6Im5ldGVhc2UuZ2V0TW9kVmVyc2lvbigpIiwiYyI6ImNvbnN0IHZlcnNpb24gPSBuZXRlYXNlLmdldE1vZFZlcnNpb24oKTtcbmNvbnNvbGUubG9nKHZlcnNpb24pOyJ9XX0sInN5cy1vcyI6eyJiIjoi57O757ufIC8gT3MiLCJ0IjoiT3MiLCJkIjoi5pON5L2c57O757uf5paH5Lu26IO95Yqb44CCIiwidGFncyI6W3sidGV4dCI6IuW3suaOpee6vyIsInR5cGUiOiJncmVlbiJ9XSwiTSI6W3sibiI6Im9zLnJlYWRGaWxlIiwiZCI6Iuivu+WPluacrOWcsOaWh+S7tuOAgiIsInMiOiJjb25zdCB0ZXh0ID0gb3MucmVhZEZpbGUocGF0aCkiLCJjIjoiaWYob3MuZmlsZUV4aXN0cygnL3NkY2FyZC9jb25maWcuanNvbicpKSB7XG4gICAgY29uc3QgY29uZiA9IG9zLnJlYWRGaWxlKCcvc2RjYXJkL2NvbmZpZy5qc29uJyk7XG4gICAgY29uc29sZS5sb2coY29uZik7XG59In1dfX19";
-        const _0x8b3c = "2603586344"; // QQ
-        const _0x4d9e = "TR123efhkopjk"; // 密钥
-
-        (function() {
-            let _decryptedData = null;
-            let _isAuth = false;
-            let _currentCode = "";
-            let _appConfig = { level1: true, qq: true, network: true, f12: true, level2: false };
-            let _l2Hash = localStorage.getItem('wb_l2_hash') || "";
-
-            function initConfig() {
-                const saved = localStorage.getItem('wb_config');
-                if (saved) { try { _appConfig = JSON.parse(saved); } catch(e){} }
-                document.getElementById('toggle-level1').checked = _appConfig.level1;
-                document.getElementById('toggle-qq').checked = _appConfig.qq;
-                document.getElementById('toggle-network').checked = _appConfig.network;
-                document.getElementById('toggle-f12').checked = _appConfig.f12;
-                document.getElementById('toggle-level2').checked = _appConfig.level2;
-                if (_appConfig.f12) enableF12(); else disableF12();
-                updateAuthUI();
-                document.getElementById('qq-input').value = _0x8b3c;
-                document.getElementById('support-qq-text').innerText = _0x8b3c;
+        // ================= 核心安全防调试 =================
+        function preventDefault(e) { e.preventDefault(); return false; }
+        function blockKeys(e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I','i','J','j'].includes(e.key)) || (e.ctrlKey && ['U','u'].includes(e.key))) {
+                e.preventDefault(); return false;
             }
+        }
+        function enableF12() { document.addEventListener('contextmenu', preventDefault); document.addEventListener('keydown', blockKeys); }
+        function disableF12() { document.removeEventListener('contextmenu', preventDefault); document.removeEventListener('keydown', blockKeys); }
 
-            window.updateConfig = function(key, val) {
-                _appConfig[key] = val;
-                localStorage.setItem('wb_config', JSON.stringify(_appConfig));
-                if (key === 'f12') { val ? enableF12() : disableF12(); }
-                if (key === 'level1') { updateAuthUI(); }
-            };
+        // ================= SHA-256 加密 =================
+        async function sha256(msg) {
+            const buf = new TextEncoder().encode(msg);
+            const hash = await crypto.subtle.digest('SHA-256', buf);
+            return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
 
-            function updateAuthUI() {
-                const display = _appConfig.level1 ? 'block' : 'none';
-                document.getElementById('group-pwd').style.display = display;
-                document.getElementById('group-phone').style.display = display;
-                document.getElementById('group-code').style.display = display;
-                document.getElementById('group-qq').style.display = (_appConfig.level1 && _appConfig.qq) ? 'block' : 'none';
+        // ================= 核心数据 =================
+        // 极速加载，不再使用繁琐的 Base64
+        const menuTree = [
+            { group: "新版 · 指南", items: [ { id: "guide-overview", name: "概览" }, { id: "guide-quickstart", name: "快速开始" }, { id: "guide-pagestate", name: "页面状态" } ] },
+            {
+                group: "新版 · 核心运行环境",
+                items: [
+                    { id: "core-events", name: "事件", tag: { text: "部分", type: "yellow" }, children: [ { id: "event-onbuild", name: "onPlayerBuildBlockEvent" }, { id: "event-onchat", name: "onSendChatMessageEvent" }, { id: "event-ontick", name: "onTickEvent" }, { id: "event-onleave", name: "onLeaveGameEvent" } ] },
+                    { id: "core-scriptbase", name: "ScriptBase", tag: { text: "已接线", type: "green" } },
+                    { id: "core-minecraft", name: "Minecraft", tag: { text: "已接线", type: "green" } },
+                    { id: "core-world", name: "World", tag: { text: "已接线", type: "green" } },
+                    { id: "core-actor", name: "Actor", tag: { text: "已接线", type: "green" } },
+                    { id: "core-player", name: "Player", tag: { text: "已接线", type: "green" } },
+                    { id: "core-localplayer", name: "LocalPlayer", tag: { text: "已接线", type: "green" } },
+                    { id: "core-item", name: "Item", tag: { text: "已接线", type: "green" } },
+                    { id: "core-block", name: "Block", tag: { text: "已接线", type: "green" } },
+                    { id: "core-nbt", name: "NBT", tag: { text: "已接线", type: "green" } },
+                    { id: "core-packet", name: "Packet", tag: { text: "已接线", type: "green" } },
+                    { id: "core-wiring", name: "接线状态", tag: { text: "部分", type: "yellow" } }
+                ]
+            },
+            { group: "新版 · 界面与输入", items: [ { id: "ui-camera", name: "Camera", tag: { text: "已接线", type: "green" } }, { id: "ui-input", name: "Input", tag: { text: "已接线", type: "green" } }, { id: "ui-options", name: "Options", tag: { text: "已接线", type: "green" } }, { id: "ui-media", name: "Media", tag: { text: "已接线", type: "green" } }, { id: "ui-menu", name: "Menu", tag: { text: "已接线", type: "green" } }, { id: "ui-gui", name: "Gui", tag: { text: "已接线", type: "green" } }, { id: "ui-i18n", name: "I18n", tag: { text: "已接线", type: "green" } } ] },
+            { group: "新版 · 工具与系统", items: [ { id: "sys-sp", name: "Sp", tag: { text: "已接线", type: "green" } }, { id: "sys-network", name: "Network", tag: { text: "已接线", type: "green" } }, { id: "sys-socket", name: "Socket", tag: { text: "已接线", type: "green" } }, { id: "sys-netease", name: "NetEase", tag: { text: "部分", type: "yellow" } }, { id: "sys-os", name: "Os", tag: { text: "已接线", type: "green" } } ] }
+        ];
+
+        const docData = {
+            'guide-overview': { title: '概览', breadcrumb: '指南 / 概览', tags: [{text: '指南', type: 'blue'}], desc: 'WorldBox 脚本 API 基础介绍。', methods: [{ name: 'api.getVersion', desc: '获取版本号。', syntax: 'const ver = api.getVersion();', code: `console.log("版本: " + api.getVersion());` }] },
+            'guide-quickstart': { title: '快速开始', breadcrumb: '指南 / 快速开始', tags: [{text: '教程', type: 'blue'}], desc: '第一行代码。', methods: [{ name: 'minecraft.broadcast', desc: '全服广播', syntax: 'minecraft.broadcast(msg)', code: `minecraft.broadcast("§a服务器已加载脚本！");` }] },
+            'guide-pagestate': { title: '页面状态', breadcrumb: '指南 / 页面状态', tags: [{text: '已接线', type: 'green'}], desc: '获取当前 UI。', methods: [{ name: 'ui.getCurrentState', desc: '获取状态。', syntax: 'ui.getCurrentState()', code: `// 略` }] },
+            
+            'core-events': {
+                title: '事件', breadcrumb: '核心 / 事件', tags: [{text: '部分', type: 'yellow'}, {text: '接口契约', type: 'blue'}],
+                warning: '本页仅部分成员已接线：带「未接线」标记的接口不会在脚本中导出，调用前请核对标记。',
+                desc: '脚本全局事件回调，通过监听游戏内的底层行为，开发者可以实现各种自动化机制。',
+                methods: [
+                    { name: 'onPlayerBuildBlockEvent', desc: '玩家成功放置方块后触发。', syntax: 'function onPlayerBuildBlockEvent(id, x, y, z, side) {}', params: [{name: 'id', type: 'string', desc: '玩家唯一 ID'}, {name: 'x, y, z', type: 'number', desc: '方块坐标'}], code: `function onPlayerBuildBlockEvent(id, x, y, z, side) {\n    const blockType = block.getType(x, y, z);\n    if (blockType === 'minecraft:bedrock') {\n        block.setType(x, y, z, 'minecraft:air');\n        minecraft.clientMessage("§c你不能放置基岩！");\n    }\n}` },
+                    { name: 'onSendChatMessageEvent', desc: '玩家发送聊天消息时触发。', syntax: 'function onSendChatMessageEvent(message) {}', code: `function onSendChatMessageEvent(message) {\n    if (message.includes("刷屏")) {\n        return true; // 取消发送\n    }\n}` },
+                    { name: 'onTickEvent', desc: '服务器每 tick 触发一次。常用于定时器。', syntax: 'function onTickEvent() {}', code: `let tickCount = 0;\nfunction onTickEvent() {\n    tickCount++;\n    if (tickCount >= 100) { tickCount = 0; }\n}` },
+                    { name: 'onLeaveGameEvent', desc: '玩家离开游戏时触发。', syntax: 'function onLeaveGameEvent(playerId) {}', code: `function onLeaveGameEvent(playerId) {\n    minecraft.broadcast("§e有玩家离开了游戏");\n}` }
+                ]
+            },
+            'event-onbuild': { title: 'onPlayerBuildBlockEvent', breadcrumb: '事件 / 放置', tags: [{text: '已接线', type: 'green'}], desc: '见事件主页说明。', methods: [{name: 'onPlayerBuildBlockEvent', desc: '', syntax: '', code: `// 略`}] },
+            'event-onchat': { title: 'onSendChatMessageEvent', breadcrumb: '事件 / 聊天', tags: [{text: '已接线', type: 'green'}], desc: '见事件主页说明。', methods: [{name: 'onSendChatMessageEvent', desc: '', syntax: '', code: `// 略`}] },
+            'event-ontick': { title: 'onTickEvent', breadcrumb: '事件 / Tick', tags: [{text: '已接线', type: 'green'}], desc: '见事件主页说明。', methods: [{name: 'onTickEvent', desc: '', syntax: '', code: `// 略`}] },
+            'event-onleave': { title: 'onLeaveGameEvent', breadcrumb: '事件 / 离开', tags: [{text: '已接线', type: 'green'}], desc: '见事件主页说明。', methods: [{name: 'onLeaveGameEvent', desc: '', syntax: '', code: `// 略`}] },
+
+            'core-scriptbase': { title: 'ScriptBase', breadcrumb: '核心 / ScriptBase', tags: [{text: '已接线', type: 'green'}], desc: '基础脚本模块。用于管理生命周期、异步任务。', methods: [{ name: 'ScriptBase.mount', desc: '挂载子脚本。', syntax: 'ScriptBase.mount(name, callback)', code: `ScriptBase.mount('teleport', () => {\n    console.log("模块已注入");\n});` }] },
+            'core-minecraft': { title: 'Minecraft', breadcrumb: '核心 / Minecraft', tags: [{text: '已接线', type: 'green'}], desc: '游戏内核交互模块。', methods: [{ name: 'minecraft.clientMessage', desc: '发送本地消息。', syntax: 'minecraft.clientMessage(text)', code: `minecraft.clientMessage("§b欢迎登录！");` }] },
+            'core-world': { title: 'World', breadcrumb: '核心 / World', tags: [{text: '已接线', type: 'green'}], desc: '世界环境控制模块。', methods: [{ name: 'world.setTime', desc: '设置时间。', syntax: 'world.setTime(time)', code: `world.setTime(6000); // 正午` }] },
+            'core-actor': { title: 'Actor', breadcrumb: '核心 / Actor', tags: [{text: '已接线', type: 'green'}], desc: '实体控制模块。', methods: [{ name: 'actor.spawn', desc: '生成实体。', syntax: 'actor.spawn(type, x, y, z)', code: `actor.spawn('minecraft:zombie', 120, 65, 120);` }] },
+            'core-player': { title: 'Player', breadcrumb: '核心 / Player', tags: [{text: '已接线', type: 'green'}], desc: '玩家状态控制。', methods: [{ name: 'player.teleport', desc: '传送玩家。', syntax: 'player.teleport(id, x, y, z)', code: `player.teleport("Steve", 0, 64, 0);` }] },
+            'core-localplayer': { title: 'LocalPlayer', breadcrumb: '核心 / LocalPlayer', tags: [{text: '已接线', type: 'green'}], desc: '本地客户端玩家。', methods: [{ name: 'localplayer.getEntity', desc: '获取实体。', syntax: 'const me = localplayer.getEntity()', code: `const me = localplayer.getEntity();\nconsole.log(me.health);` }] },
+            'core-item': {
+                title: 'Item', breadcrumb: '核心 / Item', tags: [{text: '已接线', type: 'green'}], desc: '物品堆栈操作模块。',
+                methods: [
+                    { name: 'item.create', desc: '创建一个新的物品实例。', syntax: 'item.create(type, count)', code: `// 创建 64 个苹果\nconst apples = item.create('minecraft:apple', 64);` },
+                    { name: 'item.setDisplayName', desc: '修改物品名称。', syntax: 'item.setDisplayName(itemStack, name)', code: `const sword = item.create('minecraft:diamond_sword', 1);\nitem.setDisplayName(sword, "§d神器");` }
+                ]
+            },
+            'core-block': { title: 'Block', breadcrumb: '核心 / Block', tags: [{text: '已接线', type: 'green'}], desc: '方块模块。', methods: [{ name: 'block.setType', desc: '设置方块。', syntax: 'block.setType(x, y, z, type)', code: `block.setType(10, 64, 10, 'minecraft:diamond_block');` }] },
+            'core-nbt': { title: 'NBT', breadcrumb: '核心 / NBT', tags: [{text: '已接线', type: 'green'}], desc: '底层数据。', methods: [{ name: 'nbt.setEntityTag', desc: '修改NBT。', syntax: 'nbt.setEntityTag(e, k, v)', code: `nbt.setEntityTag(zombie.id, "IsImmuneToFire", 1);` }] },
+            'core-packet': { title: 'Packet', breadcrumb: '核心 / Packet', tags: [{text: '已接线', type: 'green'}], desc: '网络包。', methods: [{ name: 'packet.intercept', desc: '拦截包。', syntax: 'packet.intercept(name, cb)', code: `packet.intercept('send_chat', (data) => { return true; });` }] },
+            'core-wiring': { title: '接线状态', breadcrumb: '核心 / 接线', tags: [{text: '部分', type: 'yellow'}], desc: '查询状态。', methods: [{ name: 'wiring.check', desc: '检查。', syntax: 'wiring.check(api)', code: `wiring.check('minecraft');` }] },
+
+            'ui-camera': { title: 'Camera', breadcrumb: '界面 / Camera', tags: [{text: '已接线', type: 'green'}], desc: '相机。', methods: [{ name: 'camera.setFov', desc: '设置视野。', syntax: 'camera.setFov(val)', code: `camera.setFov(90);` }] },
+            'ui-input': { title: 'Input', breadcrumb: '界面 / Input', tags: [{text: '已接线', type: 'green'}], desc: '输入。', methods: [{ name: 'input.onKeyDown', desc: '按键。', syntax: 'input.onKeyDown(key, cb)', code: `input.onKeyDown('key.f', () => {});` }] },
+            'ui-options': { title: 'Options', breadcrumb: '界面 / Options', tags: [{text: '已接线', type: 'green'}], desc: '设置。', methods: [{ name: 'options.setVolume', desc: '音量。', syntax: 'options.setVolume(ch, v)', code: `options.setVolume('music', 0.0);` }] },
+            'ui-media': { title: 'Media', breadcrumb: '界面 / Media', tags: [{text: '已接线', type: 'green'}], desc: '媒体。', methods: [{ name: 'media.playSound', desc: '播放。', syntax: 'media.playSound(id)', code: `media.playSound('random.orb');` }] },
+            'ui-menu': { title: 'Menu', breadcrumb: '界面 / Menu', tags: [{text: '已接线', type: 'green'}], desc: '菜单。', methods: [{ name: 'menu.addButton', desc: '按钮。', syntax: 'menu.addButton(l, cb)', code: `menu.addCustomButton('main', '回城', () => {});` }] },
+            'ui-gui': { title: 'Gui', breadcrumb: '界面 / Gui', tags: [{text: '已接线', type: 'green'}], desc: '界面。', methods: [{ name: 'gui.drawText', desc: '文字。', syntax: 'gui.drawText(t, x, y)', code: `gui.drawText("§c血量", 10, 10);` }] },
+            'ui-i18n': { title: 'I18n', breadcrumb: '界面 / I18n', tags: [{text: '已接线', type: 'green'}], desc: '多语言。', methods: [{ name: 'i18n.translate', desc: '翻译。', syntax: 'i18n.translate(k)', code: `i18n.translate('stone');` }] },
+
+            'sys-sp': { title: 'Sp', breadcrumb: '系统 / Sp', tags: [{text: '已接线', type: 'green'}], desc: '存储。', methods: [{ name: 'sp.putString', desc: '存。', syntax: 'sp.putString(k, v)', code: `sp.putString('k', 'v');` }] },
+            'sys-network': { title: 'Network', breadcrumb: '系统 / Network', tags: [{text: '已接线', type: 'green'}], desc: '网络。', methods: [{ name: 'network.get', desc: 'GET。', syntax: 'network.get(u, cb)', code: `network.get('api.com', (e, r) => {});` }] },
+            'sys-socket': { title: 'Socket', breadcrumb: '系统 / Socket', tags: [{text: '已接线', type: 'green'}], desc: '长连接。', methods: [{ name: 'socket.connect', desc: '连接。', syntax: 'socket.connect(u)', code: `socket.connect('wss://chat');` }] },
+            'sys-netease': { title: 'NetEase', breadcrumb: '系统 / NetEase', tags: [{text: '部分', type: 'yellow'}], desc: '网易接口。', methods: [{ name: 'netease.getVersion', desc: '版本。', syntax: 'netease.getVersion()', code: `netease.getVersion();` }] },
+            'sys-os': { title: 'Os', breadcrumb: '系统 / Os', tags: [{text: '已接线', type: 'green'}], desc: '文件。', methods: [{ name: 'os.readFile', desc: '读文件。', syntax: 'os.readFile(p)', code: `os.readFile('/sdcard/a.json');` }] }
+        };
+
+        // ================= 配置与验证逻辑 =================
+        let appConfig = { level1: true, qq: true, network: true, f12: true, level2: false };
+        let currentCode = "";
+        let l2Hash = localStorage.getItem('wb_l2_hash') || "";
+
+        function loadConfig() {
+            const saved = localStorage.getItem('wb_config');
+            if (saved) { try { appConfig = JSON.parse(saved); } catch(e){} }
+            
+            document.getElementById('toggle-level1').checked = appConfig.level1;
+            document.getElementById('toggle-qq').checked = appConfig.qq;
+            document.getElementById('toggle-network').checked = appConfig.network;
+            document.getElementById('toggle-f12').checked = appConfig.f12;
+            document.getElementById('toggle-level2').checked = appConfig.level2;
+            
+            if(appConfig.f12) enableF12(); else disableF12();
+            updateAuthUI();
+            document.getElementById('qq-input').value = "2603586344";
+            document.getElementById('support-qq-text').innerText = "2603586344";
+        }
+
+        function updateConfig(key, val) {
+            appConfig[key] = val;
+            localStorage.setItem('wb_config', JSON.stringify(appConfig));
+            if (key === 'f12') { val ? enableF12() : disableF12(); }
+            if (key === 'level1') { updateAuthUI(); }
+            if (key === 'level2') {
+                document.getElementById('level2-settings-panel').style.display = val ? 'block' : 'none';
             }
+        }
 
-            function preventDefault(e) { e.preventDefault(); return false; }
-            function blockKeys(e) {
-                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I','i','J','j'].includes(e.key)) || (e.ctrlKey && ['U','u'].includes(e.key))) {
-                    e.preventDefault(); return false;
-                }
-            }
-            function enableF12() { document.addEventListener('contextmenu', preventDefault); document.addEventListener('keydown', blockKeys); }
-            function disableF12() { document.removeEventListener('contextmenu', preventDefault); document.removeEventListener('keydown', blockKeys); }
+        function updateAuthUI() {
+            const display = appConfig.level1 ? 'block' : 'none';
+            document.getElementById('group-pwd').style.display = display;
+            document.getElementById('group-phone').style.display = display;
+            document.getElementById('group-code').style.display = display;
+            document.getElementById('group-qq').style.display = (appConfig.level1 && appConfig.qq) ? 'block' : 'none';
+        }
 
-            async function sha256(msg) {
-                const buf = new TextEncoder().encode(msg);
-                const hash = await crypto.subtle.digest('SHA-256', buf);
-                return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
-            }
-
-            window.sendCode = function() {
-                const phone = document.getElementById('phone-input').value;
-                if (!/^1[3-9]\d{9}$/.test(phone)) { alert("请输入正确的11位手机号！"); return; }
-                _currentCode = Math.floor(100000 + Math.random() * 900000).toString();
-                alert(`【WorldBox】您的验证码为：${_currentCode}。`);
-                const btn = document.getElementById('send-btn');
-                btn.disabled = true; let time = 60; btn.innerText = `${time}s 后重发`;
-                const timer = setInterval(() => {
-                    time--; btn.innerText = `${time}s 后重发`;
-                    if (time <= 0) { clearInterval(timer); btn.disabled = false; btn.innerText = "获取验证码"; }
-                }, 1000);
-            };
-
-            window.handleLevel1 = async function() {
-                const errorMsg = document.getElementById('auth-error');
-                if (!_appConfig.level1) { document.getElementById('auth-overlay').style.display = 'none'; return checkNext(); }
-                if (_appConfig.network) {
-                    errorMsg.innerText = "正在校验网络环境..."; errorMsg.style.color = "#2563eb"; errorMsg.style.display = 'block';
-                    await new Promise(r => setTimeout(r, 800));
-                    errorMsg.style.color = "#ef4444";
-                }
-                const pwd = document.getElementById('password-input').value;
-                const phone = document.getElementById('phone-input').value;
-                const qq = document.getElementById('qq-input').value;
-                const code = document.getElementById('code-input').value;
-                const isPwd = (pwd === _0x4d9e);
-                const isPhone = /^1[3-9]\d{9}$/.test(phone);
-                const isQQ = _appConfig.qq ? (qq === _0x8b3c) : true;
-                const isCode = (code === _currentCode && code !== "");
-                if (isPwd && isPhone && isQQ && isCode) {
-                    document.getElementById('auth-overlay').style.display = 'none';
-                    checkNext();
-                } else {
-                    errorMsg.innerText = "验证失败，请检查信息！"; errorMsg.style.display = 'block';
-                    setTimeout(() => { errorMsg.style.display = 'none'; }, 3000);
-                }
-            };
-
-            function checkNext() {
-                if (_appConfig.level2 && _l2Hash) {
-                    document.getElementById('level2-overlay').classList.add('active');
-                } else {
-                    unlockDashboard();
-                }
-            }
-
-            window.verifyLevel2 = async function() {
-                const inputPwd = document.getElementById('level2-input').value;
-                const inputHash = await sha256(inputPwd);
-                if (inputHash === _l2Hash) {
-                    document.getElementById('level2-overlay').classList.remove('active');
-                    unlockDashboard();
-                } else {
-                    const err = document.getElementById('level2-error');
-                    err.style.display = 'block'; setTimeout(() => { err.style.display = 'none'; }, 3000);
-                }
-            };
-
-            window.saveLevel2Pwd = async function() {
-                const pwd = document.getElementById('new-level2-input').value;
-                const msg = document.getElementById('settings-msg');
-                if (!_appConfig.level2) { alert("请先开启二级密码开关！"); return; }
-                if (pwd.trim() === "") {
-                    localStorage.removeItem('wb_l2_hash'); _l2Hash = ""; alert("二级密码已清空！"); return;
-                }
-                _l2Hash = await sha256(pwd);
-                localStorage.setItem('wb_l2_hash', _l2Hash);
-                msg.style.display = 'block'; setTimeout(() => { msg.style.display = 'none'; }, 3000);
-                document.getElementById('new-level2-input').value = '';
-            };
-
-            window.copyQQ = function() {
-                navigator.clipboard.writeText(_0x8b3c).then(() => alert("客服 QQ 号已复制：" + _0x8b3c));
-            };
-
-            function unlockDashboard() {
-                _isAuth = true;
-                document.getElementById('app-container').style.display = 'flex';
-                try {
-                    const jsonStr = decodeURIComponent(escape(window.atob(_0x9a2f)));
-                    _decryptedData = JSON.parse(jsonStr);
-                    renderApp(_decryptedData);
-                } catch(e) {
-                    alert("数据解密失败，请检查密钥！");
-                }
-            }
-
-            // 防篡改与反调试（按原模板保留）
-            setInterval(() => {
-                const app = document.getElementById('app-container');
-                if (app.style.display === 'flex' && !_isAuth) {
-                    document.body.innerHTML = "<h1 style='color:red;text-align:center;margin-top:20%'>检测到非法篡改，数据已销毁！</h1>";
-                }
-                (function() { return false; }['constructor']('debugger')['call']());
+        function sendCode() {
+            const phone = document.getElementById('phone-input').value;
+            if (!/^1[3-9]\d{9}$/.test(phone)) { alert("请输入正确的11位手机号！"); return; }
+            currentCode = Math.floor(100000 + Math.random() * 900000).toString();
+            alert(`【WorldBox】您的验证码为：${currentCode}。`);
+            
+            const btn = document.getElementById('send-btn');
+            btn.disabled = true; let time = 60; btn.innerText = `${time}s 后重发`;
+            const timer = setInterval(() => {
+                time--; btn.innerText = `${time}s 后重发`;
+                if (time <= 0) { clearInterval(timer); btn.disabled = false; btn.innerText = "获取验证码"; }
             }, 1000);
+        }
 
-            function highlightCode(code) {
-                if (!code) return '';
-                let escaped = code.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-                return escaped
-                    .replace(/'([^']*)'/g, '<span class="code-string">\'$1\'</span>')
-                    .replace(/`([^`]*)`/g, '<span class="code-string">`$1`</span>')
-                    .replace(/\b(function|const|let|var|if|else|return|new|for|while|try|catch)\b/g, '<span class="code-keyword">$1</span>')
-                    .replace(/\b(console|minecraft|block|world|actor|player|localplayer|item|nbt|packet|wiring|camera|input|options|media|menu|gui|i18n|sp|network|socket|os|script|api|ui|page)\b/g, '<span class="code-func">$1</span>')
-                    .replace(/\b(\d+)\b/g, '<span class="code-num">$1</span>');
+        async function verifyLevel1() {
+            const errorMsg = document.getElementById('auth-error');
+            if (!appConfig.level1) { document.getElementById('auth-overlay').style.display = 'none'; return checkNext(); }
+
+            if (appConfig.network) {
+                errorMsg.innerText = "⏳ 正在校验网络环境..."; errorMsg.style.color = "#2563eb"; errorMsg.style.display = 'block';
+                await new Promise(r => setTimeout(r, 600)); 
+                errorMsg.style.color = "#ef4444";
             }
 
-            function renderApp(data) {
-                const menuContainer = document.getElementById('sidebar-menu');
-                let menuHtml = '';
-                data.menu.forEach(sec => {
-                    menuHtml += `<div class="nav-section"><div class="nav-title">${sec.g}</div>`;
-                    sec.i.forEach(it => {
-                        const badge = it.t ? `<span class="badge ${it.t.c}">${it.t.x}</span>` : '';
-                        menuHtml += `<a class="nav-item" data-id="${it.id}" data-search="${it.n.toLowerCase()}" href="#/${it.id}"><span>${it.n}</span>${badge}</a>`;
-                        if (it.ch) {
-                            it.ch.forEach(c => menuHtml += `<a class="nav-item sub" data-id="${c.id}" data-parent="${it.id}" data-search="${c.n.toLowerCase()}" href="#/${c.id}"><span>${c.n}</span></a>`);
-                        }
-                    });
-                    menuHtml += `</div>`;
-                });
-                menuContainer.innerHTML = menuHtml;
+            const pwd = document.getElementById('password-input').value;
+            const phone = document.getElementById('phone-input').value;
+            const qq = document.getElementById('qq-input').value;
+            const code = document.getElementById('code-input').value;
 
-                function renderDoc(id) {
-                    const contentArea = document.getElementById('content-area');
-                    const doc = data.docs[id];
-                    if (!doc) { contentArea.innerHTML = "<h1>模块完善中...</h1>"; return; }
-                    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-                    const activeEl = document.querySelector(`.nav-item[data-id="${id}"]`);
-                    if (activeEl) { activeEl.classList.add('active'); activeEl.scrollIntoView({ block: 'nearest' }); }
+            const isPwd = (pwd === "TR123efhkopjk");
+            const isPhone = /^1[3-9]\d{9}$/.test(phone);
+            const isQQ = appConfig.qq ? (qq === "2603586344") : true;
+            const isCode = (code === currentCode && code !== "");
 
-                    let html = `
-                        <div class="breadcrumb">${doc.b}</div>
-                        <h1>${doc.t}</h1>
-                        <div class="tags-row">${(doc.tags||[]).map(t => `<span class="badge ${t.type}">${t.text}</span>`).join('')}</div>
-                        ${doc.warning ? `<div class="warning-box"><span>!</span> ${doc.warning}</div>` : ''}
-                        <div class="page-desc">${doc.d}</div>
-                    `;
-                    if (doc.M) {
-                        doc.M.forEach(m => {
-                            let tableHtml = '';
-                            if (m.params && m.params.length > 0) {
-                                tableHtml = `
-                                    <h3>参数</h3>
-                                    <table>
-                                        <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
-                                        <tbody>${m.params.map(p => `<tr><td>${p.name}</td><td>${p.type}</td><td>${p.desc}</td></tr>`).join('')}</tbody>
-                                    </table>
-                                `;
-                            }
-                            html += `
-                                <div class="method-block">
-                                    <div class="method-title">${m.n}</div>
-                                    <div class="method-desc">${m.d || ''}</div>
-                                    <h3>语法</h3>
-                                    <pre><code>${highlightCode(m.s)}</code></pre>
-                                    ${tableHtml}
-                                    <h3>示例代码</h3>
-                                    <pre><code>${highlightCode(m.c)}</code></pre>
-                                </div>
-                            `;
+            if (isPwd && isPhone && isQQ && isCode) {
+                document.getElementById('auth-overlay').style.display = 'none';
+                checkNext();
+            } else {
+                errorMsg.innerText = "❌ 验证失败，请检查信息！"; errorMsg.style.display = 'block';
+                setTimeout(() => { errorMsg.style.display = 'none'; }, 3000);
+            }
+        }
+
+        function checkNext() {
+            if (appConfig.level2 && l2Hash) {
+                document.getElementById('level2-overlay').classList.add('active');
+            } else {
+                enterDashboard();
+            }
+        }
+
+        async function verifyLevel2() {
+            const inputPwd = document.getElementById('level2-input').value;
+            const inputHash = await sha256(inputPwd);
+            if (inputHash === l2Hash) {
+                document.getElementById('level2-overlay').classList.remove('active');
+                enterDashboard();
+            } else {
+                const err = document.getElementById('level2-error');
+                err.style.display = 'block'; setTimeout(() => { err.style.display = 'none'; }, 3000);
+            }
+        }
+
+        async function saveLevel2Pwd() {
+            const pwd = document.getElementById('new-level2-input').value;
+            const msg = document.getElementById('settings-msg');
+            if (!appConfig.level2) { alert("请先开启二级密码开关！"); return; }
+            if (pwd.trim() === "") {
+                localStorage.removeItem('wb_l2_hash'); l2Hash = ""; alert("二级密码已清空！"); return;
+            }
+            l2Hash = await sha256(pwd);
+            localStorage.setItem('wb_l2_hash', l2Hash);
+            msg.style.display = 'block'; setTimeout(() => { msg.style.display = 'none'; }, 3000);
+            document.getElementById('new-level2-input').value = '';
+        }
+
+        function copyQQ() {
+            navigator.clipboard.writeText("2603586344").then(() => alert("✅ 客服 QQ 号已复制：2603586344"));
+        }
+
+        function enterDashboard() {
+            document.getElementById('app-container').style.display = 'flex';
+            initApp();
+        }
+
+        // ================= 渲染逻辑 =================
+        function initApp() {
+            const menuContainer = document.getElementById('sidebar-menu');
+            let html = '';
+            menuTree.forEach(section => {
+                html += `<div class="nav-section"><div class="nav-title">${section.group}</div>`;
+                section.items.forEach(item => {
+                    const badgeHtml = item.tag ? `<span class="badge ${item.tag.type}">${item.tag.text}</span>` : '';
+                    html += `<a class="nav-item" data-id="${item.id}" href="#/${item.id}"><span>${item.name}</span> ${badgeHtml}</a>`;
+                    if (item.children) {
+                        item.children.forEach(child => {
+                            html += `<a class="nav-item sub" data-id="${child.id}" href="#/${child.id}"><span>${child.name}</span></a>`;
                         });
                     }
-                    contentArea.scrollTop = 0;
-                    contentArea.innerHTML = html;
-                }
+                });
+                html += `</div>`;
+            });
+            menuContainer.innerHTML = html;
 
-                function handleRoute() {
-                    const hash = window.location.hash.replace('#/', '') || data.menu[0].i[0].id;
-                    renderDoc(hash);
-                }
+            window.addEventListener('hashchange', handleRoute);
+            if (!window.location.hash) window.location.hash = '#/guide-overview';
+            else handleRoute();
+        }
 
-                function initSearch() {
-                    const searchInput = document.getElementById('searchInput');
-                    searchInput.addEventListener('input', function(e) {
-                        const term = e.target.value.toLowerCase().trim();
-                        const items = document.querySelectorAll('.nav-item');
-                        const sections = document.querySelectorAll('.nav-section');
-                        items.forEach(item => {
-                            const searchStr = item.getAttribute('data-search');
-                            if (searchStr.includes(term)) {
-                                item.classList.remove('hidden');
-                                if (item.hasAttribute('data-parent')) {
-                                    const parent = document.querySelector(`.nav-item[data-id="${item.getAttribute('data-parent')}"]`);
-                                    if (parent) parent.classList.remove('hidden');
-                                }
-                            } else {
-                                item.classList.add('hidden');
-                            }
-                        });
-                        sections.forEach(section => {
-                            const visibleItems = section.querySelectorAll('.nav-item:not(.hidden)');
-                            section.style.display = visibleItems.length === 0 ? 'none' : 'block';
-                        });
-                    });
-                }
+        function highlightCode(code) {
+            if(!code) return '';
+            let escaped = code.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            return escaped.replace(/'([^']*)'/g, '<span class="code-string">\'$1\'</span>').replace(/\b(function|const|let)\b/g, '<span class="code-keyword">$1</span>');
+        }
 
-                window.addEventListener('hashchange', handleRoute);
-                if (!window.location.hash) window.location.hash = `#/${data.menu[0].i[0].id}`;
-                else handleRoute();
-                initSearch();
+        function handleRoute() {
+            const hash = window.location.hash.replace('#/', '') || 'guide-overview';
+            const data = docData[hash];
+            const contentArea = document.getElementById('content-area');
+            
+            if (!data) { contentArea.innerHTML = "<h1>模块完善中...</h1>"; return; }
+
+            document.querySelectorAll('.nav-item').forEach(el => {
+                el.classList.remove('active');
+                if(el.getAttribute('data-id') === hash) el.classList.add('active');
+            });
+
+            let html = `
+                <div class="breadcrumb">${data.breadcrumb}</div>
+                <h1>${data.title}</h1>
+                <div class="tags-row">${data.tags ? data.tags.map(t => `<span class="badge ${t.type}" style="transform:none; padding:4px 10px;">${t.text}</span>`).join('') : ''}</div>
+                ${data.warning ? `<div class="warning-box"><span>⚠️</span> ${data.warning}</div>` : ''}
+                <div class="page-desc">${data.desc}</div>
+            `;
+
+            if(data.methods) {
+                data.methods.forEach(m => {
+                    html += `
+                        <div class="method-block">
+                            <div class="method-title">${m.name}</div>
+                            <div class="method-desc">${m.desc}</div>
+                            <h3>语法</h3>
+                            <pre><code>${highlightCode(m.syntax)}</code></pre>
+                            <h3>示例代码</h3>
+                            <pre><code>${highlightCode(m.code)}</code></pre>
+                        </div>
+                    `;
+                });
             }
+            contentArea.innerHTML = html;
+            window.scrollTo(0, 0);
+        }
 
-            document.getElementById('password-input').addEventListener('keypress', e => { if (e.key === 'Enter') handleLevel1(); });
-            document.getElementById('level2-input').addEventListener('keypress', e => { if (e.key === 'Enter') verifyLevel2(); });
-
-            initConfig();
-        })();
+        // 启动
+        loadConfig();
     </script>
 </body>
 </html>
